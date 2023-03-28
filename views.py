@@ -8,7 +8,6 @@ import random
 def home():
     return render_template('home.html')
     
-
 @app.route('/encurtar', methods=['POST'])
 def encurtar_url():
     if request.method == 'POST':
@@ -24,9 +23,9 @@ def encurtar_url():
         db.session.add(armazena)
         db.session.commit()
         return render_template('url_encurtado.html', url_encurtada=code)
-
+    
 @app.route('/api', methods=['POST'])
-def api():
+def retorno_api():
     if request.method == 'POST':
         url = request.form.get('site')
         link = pyshorteners.Shortener()
@@ -39,8 +38,8 @@ def api():
         # Inserindo novo jogo no banco de dados
         db.session.add(armazena)
         db.session.commit()
-        return jsonify(shorten_url)
-
+        return print(jsonify(code))
+    
 @app.route('/retornar')
 def retornar():
     return render_template('retornar.html')
