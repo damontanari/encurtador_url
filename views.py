@@ -24,7 +24,23 @@ def encurtar_url():
         db.session.add(armazena)
         db.session.commit()
         return render_template('url_encurtado.html', url_encurtada=code)
-    
+
+@app.route('/api', methods=['POST'])
+def encurtar_url():
+    if request.method == 'POST':
+        url = request.form.get('site')
+        link = pyshorteners.Shortener()
+        code = ''
+        for i in range(7):
+            random_num = random.randint(65, 90)
+            code += chr(random_num)  
+        shorten_url = link.tinyurl.short(url)
+        armazena = encurta_link(link=url, link_encurtado=code)
+        # Inserindo novo jogo no banco de dados
+        db.session.add(armazena)
+        db.session.commit()
+        return jsonify(shorten_url)
+
 @app.route('/retornar')
 def retornar():
     return render_template('retornar.html')
