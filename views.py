@@ -26,7 +26,7 @@ def encurtar_url():
         return render_template('url_encurtado.html', url_encurtada=code)
 
 @app.route('/api', methods=['POST'])
-def encurtar_url():
+def api():
     if request.method == 'POST':
         url = request.form.get('site')
         link = pyshorteners.Shortener()
