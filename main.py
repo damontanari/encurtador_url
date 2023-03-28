@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import *
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
