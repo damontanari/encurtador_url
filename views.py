@@ -26,8 +26,9 @@ def encurtar_url():
     
 @app.route('/api', methods=['GET'])
 def retorno_api():
-    resultado = encurta_link.query.all().first()
-    return jsonify(resultado)
+    code = request.args.get('code', default = '*', type = str)
+    url = encurta_link.query.filter_by(link_encurtado=code).first()
+    return jsonify(url)
     
 @app.route('/retornar')
 def retornar():
