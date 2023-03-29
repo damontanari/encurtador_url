@@ -24,7 +24,7 @@ def encurtar_url():
         db.session.commit()
         return render_template('url_encurtado.html', url_encurtada=code)
     
-@app.route('/api')
+@app.route('/api', methods=['GET'])
 def retorno_api():
     resultado = encurta_link.query.all().first()
     return jsonify(resultado)
