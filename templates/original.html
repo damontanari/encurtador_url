@@ -20,6 +20,23 @@
     <center><h2> URL Original:</h2></center>
     <br>
     <br>
-    <h1>{{link_original}}</h1>
+    <h1 id="endereco">{{link_original}}</h1>
+    <center><button class="btn btn-lg btn-primary btn-block" id="copylink" onclick="copyurl()">Copiar link</button></center>
+
+    <script>
+      
+      const url = document.getElementById('endereco')
+      const url_ok = url.textContent;
+      const btt = document.getElementById('copylink')
+      
+      btt.onClick = function get(){
+        copyurl()
+      }
+
+      function copyurl(){
+        navigator.clipboard.writeText(url_ok)
+      }
+
+    </script>
   </body>
 </html>

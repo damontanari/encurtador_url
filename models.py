@@ -7,3 +7,10 @@ class encurta_link(db.Model):
 
     def __repr__(self):
         return self.link
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'link': self.link,
+            'codigo': self.link_encurtado
+        }

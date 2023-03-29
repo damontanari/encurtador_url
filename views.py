@@ -8,6 +8,8 @@ import random
 def home():
     return render_template('home.html')
     
+
+    
 @app.route('/encurtar', methods=['POST'])
 def encurtar_url():
     global code
@@ -23,18 +25,31 @@ def encurtar_url():
         # Inserindo novo jogo no banco de dados
         db.session.add(armazena)
         db.session.commit()
-        return render_template('url_encurtado.html', url_encurtada=f'https://encurtaurlflask.onrender.com/api?code={code}')
-    
-@app.route(f'/api', methods=['GET'])
-def retorno_api():
+        return render_template('url_encurtado.html', url_encurtada=f'https://encurtaurlflask.onrender.com/ret?code={code}')
+
+
+
+@app.route(f'/ret', methods=['GET'])
+def retorno_link():
     code = request.args.get('code', default = '*', type = str)
-    print(code)
     url = encurta_link.query.filter_by(link_encurtado=code).first()
     return redirect(f'{url}', code=302)
-    
+
+
+
+@app.route('/api')
+def retorno_api():
+    code = request.args.get('code', default = '*', type = str)
+    url = encurta_link.query.filter_by(link_encurtado=code).first()
+    return jsonify(url.to_dict())
+
+
+
 @app.route('/retornar')
 def retornar():
     return render_template('retornar.html')
+
+
 
 @app.route('/original', methods=['POST'])
 def original():
