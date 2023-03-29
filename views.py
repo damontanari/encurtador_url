@@ -39,7 +39,7 @@ def retorno_link():
 
 @app.route('/api')
 def retorno_api():
-    code = request.args.get('code', default = '*', type = str)
+    # code = request.args.get('code', default = '*', type = str)
     url = encurta_link.query.filter_by(link_encurtado=code).first()
     return jsonify(url.to_dict())
 
