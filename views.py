@@ -10,6 +10,7 @@ def home():
     
 @app.route('/encurtar', methods=['POST'])
 def encurtar_url():
+    global code
     if request.method == 'POST':
         url = request.form.get('site')
         link = pyshorteners.Shortener()
@@ -22,9 +23,9 @@ def encurtar_url():
         # Inserindo novo jogo no banco de dados
         db.session.add(armazena)
         db.session.commit()
-        return render_template('url_encurtado.html', url_encurtada=code)
+        return render_template('url_encurtado.html', url_encurtada=f'https://encurtaurlflask.onrender.com/api?code={code}')
     
-@app.route('/api', methods=['GET'])
+@app.route(f'/api', methods=['GET'])
 def retorno_api():
     code = request.args.get('code', default = '*', type = str)
     print(code)
