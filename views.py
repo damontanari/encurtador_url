@@ -29,8 +29,7 @@ def retorno_api():
     code = request.args.get('code', default = '*', type = str)
     print(code)
     url = encurta_link.query.filter_by(link_encurtado=code).first()
-    # url = '<encurta_url %r>' % "https://www.linkedin.com/in/daniel-montanari-52110a219"
-    return redirect(url[13:len(url)-1], code=302)
+    return redirect(f'{url}', code=302)
     
 @app.route('/retornar')
 def retornar():

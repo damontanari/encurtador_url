@@ -6,4 +6,4 @@ class encurta_link(db.Model):
     link_encurtado = db.Column(db.String)
 
     def __repr__(self):
-        return '<encurta_url %r>' % self.link
+        return self.link
